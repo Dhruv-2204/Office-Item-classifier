@@ -7,6 +7,6 @@ from bing_image_downloader import downloader
 # downloader.download("pen", limit=100, output_dir='images',timeout=60)
 # downloader.download("mug", limit=100, output_dir='images',timeout=60)
 # downloader.download("stapler", limit=100, output_dir='images',timeout=60)
-downloader.download("phone", limit=100, output_dir='images',timeout=60)
+downloader.download("Plastic water bottle", limit=25, output_dir=r'C:\Users\dylan\Documents\Computer science\Computer Science Year 3\temp',timeout=60)
 
 
