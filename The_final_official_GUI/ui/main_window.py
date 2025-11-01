@@ -18,7 +18,6 @@ from model_loader import ModelLoader
 from camera_handler import CameraThread
 from file_processor import FileProcessor
 
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -477,7 +476,7 @@ class MainWindow(QMainWindow):
             if detection:
                 os.makedirs('output', exist_ok=True)
                 timestamp = time.strftime("%Y%m%d_%H%M%S")
-                snapshot_path = f"output/snapshot_{timestamp}.jpg"
+                snapshot_path = f"snapshots/snapshot_{timestamp}.jpg"
                 cv2.imwrite(snapshot_path, processed_image)
                 self.log_message(f"Saved to: {snapshot_path}")
             else:
@@ -544,32 +543,61 @@ class MainWindow(QMainWindow):
         self.log_message("Camera stopped")
 
     def process_camera_frame(self, frame):
-        """Process camera frame with single highest confidence detection"""
+        """Simple approach that maintains boxes with minimal flicker"""
         if not self.is_camera_on or self.processing_files:
             return
 
-        # Store the frame for snapshot functionality
         self.last_camera_frame = frame.copy()
 
-        current_time = time.time()
+        if not hasattr(self, 'frame_counter'):
+            self.frame_counter = 0
+            self.last_detection_frame = None
 
-        # No delay - process every frame
+        self.frame_counter += 1
+        current_time = time.time()
         frame = cv2.flip(frame, 1)
 
-        # Get only the highest confidence detection
-        processed_frame, detection = self.model_loader.predict_single(frame)
+        if self.frame_counter % 3 == 0:  # Process frame
+            processed_frame, detection = self.model_loader.predict_single(frame)
+            self.last_detection_frame = processed_frame.copy()
 
-        # Display frame immediately
+            if detection and current_time - self.last_detection_log > 2.0:
+                self.log_message(f"Live: {detection['class_name']} - {detection['confidence']:.2f}")
+                self.last_detection_log = current_time
+        else:
+            # On skipped frames, use the last processed frame with boxes
+            if self.last_detection_frame is not None:
+                processed_frame = self.last_detection_frame
+                detection = None  # Don't update detection info on skipped frames
+            else:
+                processed_frame = frame
+                detection = None
+
+        # Always display some version of the frame
         self.display_detected_image(processed_frame)
         self.last_display_time = current_time
 
-        # Update detection info immediately
-        self.update_detection_info(detection)
-
-        # Log live detections in real-time (but not too frequently)
-        if detection and current_time - self.last_detection_log > 2.0:
-            self.log_message(f"Live: {detection['class_name']} - {detection['confidence']:.2f}")
-            self.last_detection_log = current_time
+        # Only update detection info on processed frames to avoid flickering text
+        if self.frame_counter % 3 == 0:
+            self.update_detection_info(detection)
+    def display_frame_only(self, frame):
+        """Quick display without processing"""
+        try:
+            frame = cv2.flip(frame, 1)
+            rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            h, w, ch = rgb_image.shape
+            bytes_per_line = ch * w
+            qt_image = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format_RGB888)
+            pixmap = QPixmap.fromImage(qt_image)
+            scaled_pixmap = pixmap.scaled(
+                self.camera_label.width(),
+                self.camera_label.height(),
+                Qt.KeepAspectRatio,
+                Qt.SmoothTransformation
+            )
+            self.camera_label.setPixmap(scaled_pixmap)
+        except Exception as e:
+            print(f"Display error: {e}")
 
     def upload_image(self):
         """Upload single image - auto stops camera"""

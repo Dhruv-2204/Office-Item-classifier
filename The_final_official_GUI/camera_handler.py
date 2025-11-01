@@ -2,7 +2,6 @@ import cv2
 import time
 from PySide6.QtCore import QThread, Signal
 
-
 class CameraThread(QThread):
     frame_ready = Signal(object)
     fps_update = Signal(float)
@@ -22,7 +21,7 @@ class CameraThread(QThread):
         self.max_failures = 10
 
     def start_camera(self, port=0):
-        """Start camera optimized for 60 FPS"""
+        """Start camera optimized for 30 FPS"""
         self.stop_camera()
         time.sleep(0.2)  # Let previous camera fully release
 
@@ -35,7 +34,7 @@ class CameraThread(QThread):
                     # Optimize camera settings for maximum FPS
                     self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
                     self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-                    self.camera.set(cv2.CAP_PROP_FPS, 60)
+                    self.camera.set(cv2.CAP_PROP_FPS, 30)
                     self.camera.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Minimal buffer
                     self.camera.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
 
@@ -43,7 +42,7 @@ class CameraThread(QThread):
                     for _ in range(3):  # Try a few times
                         ret, frame = self.camera.read()
                         if ret and frame is not None:
-                            print(f"Camera {test_port}: {frame.shape[1]}x{frame.shape[0]} @ 60 FPS")
+                            print(f"Camera {test_port}: {frame.shape[1]}x{frame.shape[0]} @ 30 FPS")
                             self.port = test_port
                             self.is_running = True
                             self.consecutive_failures = 0
