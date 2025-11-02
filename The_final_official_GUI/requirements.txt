@@ -1,0 +1,21 @@
+# Core GUI Framework
+PySide6
+
+# Computer Vision & Image Processing
+opencv-python
+opencv-contrib-python
+
+# Deep Learning & Object Detection
+ultralytics
+torch
+torchvision
+
+# Numerical Computing
+numpy
+scipy
+
+# Image Processing
+Pillow
+
+# Utilities
+pathlib2
