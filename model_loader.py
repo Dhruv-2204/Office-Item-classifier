@@ -162,7 +162,8 @@ class ModelLoader:
 
                     detection = None
                     display_frame = frame.copy()
-
+                    
+                    # Bounding box drawing
                     if results and len(results) > 0:
                         result = results[0]
                         if hasattr(result, 'boxes') and result.boxes is not None:

@@ -36,4 +36,31 @@ To install the necessary libraries and packages needed/required for the running 
 ## 7. Starting the GUI program:
 
 **Run main.py**
+
+After the program has beeen run, it will generate 3 folders: 
+
+input, output and snapshots
+
+input folder-  Images can be saved to upload for detection and classification
+output folder- All the images detected will be saved
+snapshots folder- Snapshots will be saved from live camera
 ---------------------------------------------------------------------------
+
+# **Dataset card**
+
+Link to the Roboflow dataset: **https://app.roboflow.com/dhruvs-dataset-kszei/project-1-0-2-htazc/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true**
+
+This dataset consists of 10 classes of items which are commonly found in an office. The number of images per class are listed below: 
+1. Pen (513)
+2. Mouse (214)
+3. Keyboard (162)
+4. Phone (254)
+5. Bottle (201)
+6. Mug (332)
+7. Stapler (235)
+8. Laptop (219)
+9. Bin (119)
+10. Notebook (359)
+
+The total number of images in the dataset is 1506 images. It provides an appropriate amout of data for a proper YOLO model to be trained. The code for training the model can be found in the Model Training Code directory. It must be opened ideally in Google Colab.
+

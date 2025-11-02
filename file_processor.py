@@ -29,6 +29,7 @@ class FileProcessor(QThread):
 
         self.progress_update.emit(f"Found {len(self.files_to_process)} images")
 
+    # Classification, identification and confidence level output on detection logger
     def run(self):
         os.makedirs(self.output_dir, exist_ok=True)
         total_files = len(self.files_to_process)

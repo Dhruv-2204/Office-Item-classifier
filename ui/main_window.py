@@ -496,7 +496,7 @@ class MainWindow(QMainWindow):
         return False
 
     def load_model(self):
-        """Load YOLO model"""
+        """Load YOLO11s model"""
         self.log_message("Loading YOLOv11 model...")
         if self.model_loader.load_model('trained_model/best.pt'):
             self.model_loader.start_processing()

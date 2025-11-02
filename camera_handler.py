@@ -14,7 +14,7 @@ class CameraThread(QThread):
         self.port = 0
         self.frame_count = 0
         self.last_fps_time = time.time()
-        self.target_fps = 60
+        self.target_fps = 30
         self.frame_interval = 1.0 / self.target_fps
         self.last_frame_time = 0
         self.consecutive_failures = 0
@@ -70,11 +70,11 @@ class CameraThread(QThread):
             self.wait(300)  # Quick timeout
 
     def run(self):
-        """60 FPS camera loop with precise timing"""
+        """30 FPS camera loop with precise timing"""
         while self.is_running:
             current_time = time.time()
 
-            # Precise timing control for 60 FPS
+            # Precise timing control for 30 FPS
             time_since_last = current_time - self.last_frame_time
             if time_since_last < self.frame_interval:
                 sleep_time = (self.frame_interval - time_since_last) * 1000
