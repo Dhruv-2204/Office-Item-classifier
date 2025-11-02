@@ -1,21 +1,21 @@
 # Core GUI Framework
-PySide6>=6.5.0
+PySide6
 
 # Computer Vision & Image Processing
-opencv-python>=4.8.0
-opencv-contrib-python>=4.8.0
+opencv-python
+opencv-contrib-python
 
 # Deep Learning & Object Detection
-ultralytics>=8.0.0
-torch>=2.0.0
-torchvision>=0.15.0
+ultralytics
+torch
+torchvision
 
 # Numerical Computing
-numpy>=1.24.0
-scipy>=1.10.0
+numpy
+scipy
 
 # Image Processing
-Pillow>=10.0.0
+Pillow
 
 # Utilities
-pathlib2>=2.3.0; python_version < '3.4'
+pathlib2
