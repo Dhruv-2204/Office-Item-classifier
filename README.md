@@ -1,5 +1,8 @@
 # GUI Installation Guide + Dataset Card
-
+Team members:
+Dhruv Ramachundrah (M01012616)
+Dylan Iyasawmy (M01013579) 
+Aayush Lochun (M01004726)
 -------------------------------------------------------------
 
 # Office Item Classifier GUI 
