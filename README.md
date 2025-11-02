@@ -8,7 +8,7 @@ For this project pyside6 was used due to its performance level which allows effi
 
 To install the necessary libraries and packages needed/required for the running of Office Item Classifier GUI, Follow these instructions:
 
-## 1. Download folder(zipped file of Project folder R2D2_Robotics_CW  and unzip it)
+## 1. Download folder(zipped file of Project folder R2D2_Robotics_CW  and unzip it or clone the github repository in a new folder)
 ## 2. Open the folder using PyCharm-IDE (Preferably)
 ## 3. Add a new Python (preferable PyCharm - IDE) Interpreter version 3.12 (compatible with the Libraries/packages) in the root folder (a virtual environment folder(.venv) will be created in the root directory)
 
@@ -29,7 +29,7 @@ To install the necessary libraries and packages needed/required for the running 
 
 **cd Office-Item-Classifier**
 
-## 6. Install all the libraries in requirements.txt file for the GUI to run, the downloads keep on running in the background (might take some time):
+## 6. Install all the libraries in requirements.txt file for the GUI to run, the downloads keep on running in the background (indexing) - Might take some time:
 
 **pip install -r requirements.txt**
 
