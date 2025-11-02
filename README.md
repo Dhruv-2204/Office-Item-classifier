@@ -37,7 +37,7 @@ To install the necessary libraries and packages needed/required for the running 
 
 **Run main.py**
 
-After the program has beeen run, it will generate 3 folders: 
+After the program has been run, it will generate 3 folders: 
 
 input, output and snapshots
 
@@ -62,5 +62,7 @@ This dataset consists of 10 classes of items which are commonly found in an offi
 9. Bin (119)
 10. Notebook (359)
 
-The total number of images in the dataset is 1506 images. It provides an appropriate amout of data for a proper YOLO model to be trained. The code for training the model can be found in the Model Training Code directory. It must be opened ideally in Google Colab.
+The total number of images in the dataset is 1506 images. It provides an appropriate amout of data for a proper YOLO model to be trained. 
+
+The code for training the model can be found in the Model Training Code directory, which must be opened ideally in Google Colab, and the best model is saved as best.pt in the trained model directory. It is used for object classifications by the GUI.
 
